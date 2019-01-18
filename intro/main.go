@@ -1,3 +1,4 @@
+//only files under package main compiles to executable, others under other package can be use as helpers though
 package main
 
 import (
@@ -25,11 +26,14 @@ func main() {
 	)
 	var asd, dsa string = "this is", "possible too"
 
-	//short variables dont need var keyword and are local variables (kind of let in JS)
+	//short variables are a short way to initialize variables
 	short := "short"
 	shortb := true
 
-	fmt.Println(a, text, number, text2, asd, dsa, boolean, short, shortb)
+	//you can initialize many variables of dif types at once
+	boolvar, intvar, floatvar := true, 64, 64.2
+
+	fmt.Println(a, text, number, text2, asd, dsa, boolean, short, shortb, boolvar, intvar, floatvar)
 
 	const CONSTANT = "GOPHER"
 }
