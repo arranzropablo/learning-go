@@ -25,8 +25,13 @@ func main() {
 	)
 	var asd, dsa string = "this is", "possible too"
 
-	//short variables
+	//short variables dont need var keyword and are local variables (kind of let in JS)
 	short := "short"
+	shortb := true
 
-	fmt.Println(a, text, number, text2, asd, dsa, boolean, short)
+	fmt.Println(a, text, number, text2, asd, dsa, boolean, short, shortb)
+
+	const CONSTANT = "GOPHER"
 }
+
+const EXAMPLE = "You can declare const and vars outside of functions, if they are not short variables"
