@@ -36,6 +36,33 @@ func main() {
 	fmt.Println(a, text, number, text2, asd, dsa, boolean, short, shortb, boolvar, intvar, floatvar)
 
 	const CONSTANT = "GOPHER"
+
+	fmt.Println(getAOfClubs())
+	deckSize := deckSize()
+	fmt.Println(deckSize)
+
+	suites := []string{"Hearts", "Clubs", "Spades"}
+
+	//append, delete, etc... does not modify the object, but return a copy (we can reassign then)
+	suites = append(suites, "Diamonds")
+	size := len(suites)
+	fmt.Println(suites, size)
+
+	//range returns the index and the object
+	//if we just want the object we will get an error for not using the index var
+	//we can solve it "naming" the index with an underscore
+	for _, suite := range suites {
+		fmt.Println(suite)
+	}
+}
+
+//functions can return stuff if return types are specified between parentheses (if more than one)
+func getAOfClubs() (string, string) {
+	return "Ace", "Clubs"
+}
+
+func deckSize() int64 {
+	return 52
 }
 
 const EXAMPLE = "You can declare const and vars outside of functions, if they are not short variables"
