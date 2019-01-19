@@ -1,23 +1,15 @@
 package main
 
-import "fmt"
-
-type suite string
-
-//We create a card type with a suite (which is a string) and a number (which is an int)
-type card struct {
-	number int
-	suite suite
-}
-
-//Then we create the type deck which is a array of cards
-type deck []card
-
-//This is kind of a enum
-var suites = [4]suite{"Spades", "Clubs", "Diamonds", "Hearts"}
+import (
+	"fmt"
+	"io/ioutil"
+	"os"
+	"strconv"
+	"strings"
+)
 
 //To avoid complexity we are creating a spanish deck which can be done with just numbers
-func createDeck() deck {
+func newDeck() deck {
 	var deck deck
 	for _, suite := range suites {
 		for j := 1; j <= 12; j++{
@@ -33,6 +25,58 @@ func createDeck() deck {
 //By convention names of receivers are just 1 or 2 letters
 func (d deck) print() {
 	for _, card := range d {
-		fmt.Println(card)
+		fmt.Println(card.String())
 	}
+}
+
+//Receiver functions vs parameter functions:
+//You cant declare more than 1 function with the same name if they have the same receiver (or no receiver)
+//When using interfaces, the method executed is decided dinamically
+
+func (d deck) deal(n int) (deck, deck) {
+	return d[:n], d[n:]
+}
+
+func (d deck) save(name string) bool {
+	error := ioutil.WriteFile(name, []byte(d.String()), 0666)
+	if error == nil { return true }
+	return false
+}
+
+func read(name string) deck {
+	byted, err := ioutil.ReadFile(name)
+
+	if err != nil {
+		fmt.Println(err)
+		//return newDeck()
+		os.Exit(1)
+	}
+
+	deckstring := string(byted)
+	deckStr := strings.Split(deckstring, ",")
+
+	var deck deck
+
+	for _, c := range deckStr{
+		deck = append(deck, toCard(c))
+	}
+	return deck
+}
+
+func toCard(s string) card {
+	number, _ := strconv.Atoi(strings.Split(s, " of ")[0])
+	suite := suite(strings.Split(s, " of ")[1])
+	return card{number, suite}
+}
+
+func (d deck) String() string {
+	var s []string
+	for _, c := range d {
+		s = append(s, c.String())
+	}
+	return strings.Join(s, ",")
+}
+
+func (c card) String() string {
+	return strconv.Itoa(c.number) + " of " + string(c.suite)
 }
