@@ -96,8 +96,9 @@ func (c card) String() string {
 	return strconv.Itoa(c.number) + " of " + string(c.suite)
 }
 
-//Why is this func modifying the deck if I'm passing the value?
-//Just works when swapping positions, with deal for example doesnt work
+
+//A slice is composed by a POINTER to the head of an array, the capacity (possible elements) and the length (current elements)
+//That's why, when modifying slice data inside a func it modifies the array this slice is pointing to (even if it's a copy of the slice it's still pointing to the same array)
 func (d deck) shuffle() {
 	//If we don't generate a seed it will always be the same
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -107,3 +108,6 @@ func (d deck) shuffle() {
 		d[newPos], d[i] = d[i], d[newPos]
 	}
 }
+//Happens the same with slices, maps, channels, pointers and functions
+//These are reference type bc they make reference to another data structure in memory, so we don't have to worry about pointers
+//Others: int, float, string, bool, structs... are value types and we need pointers "to change them"
