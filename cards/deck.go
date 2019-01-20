@@ -28,6 +28,8 @@ func newDeck() deck {
 func (d deck) print() {
 	for _, card := range d {
 		fmt.Println(card.String())
+		//This way it prints with name of fields just if there's no String func
+		//fmt.Printf("%+v", card)
 	}
 }
 
@@ -38,6 +40,13 @@ func (d deck) print() {
 func (d deck) deal(n int) (deck, deck) {
 	return d[:n], d[n:]
 }
+
+//Other way with pointers
+//func (d *deck) deal(n int) deck {
+//	dealtdeck := (*d)[:n]
+//	*d = (*d)[n:]
+//	return dealtdeck
+//}
 
 func (d deck) save(name string) bool {
 	error := ioutil.WriteFile(name, []byte(d.String()), 0666)
@@ -87,6 +96,8 @@ func (c card) String() string {
 	return strconv.Itoa(c.number) + " of " + string(c.suite)
 }
 
+//Why is this func modifying the deck if I'm passing the value?
+//Just works when swapping positions, with deal for example doesnt work
 func (d deck) shuffle() {
 	//If we don't generate a seed it will always be the same
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
