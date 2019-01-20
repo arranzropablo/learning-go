@@ -24,8 +24,8 @@ func TestNewDeckFirstCard(t *testing.T) {
 }
 
 func TestNewDeckLastCard(t *testing.T) {
-	if d[len(d) - 1].number != 12 || d[len(d) - 1].suite != "Hearts" {
-		t.Errorf("First card should be 12 of Hearts, but got %s", d[len(d) - 1].String())
+	if d[len(d)-1].number != 12 || d[len(d)-1].suite != "Hearts" {
+		t.Errorf("First card should be 12 of Hearts, but got %s", d[len(d)-1].String())
 	}
 }
 
