@@ -3,16 +3,18 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 //To avoid complexity we are creating a spanish deck which can be done with just numbers
 func newDeck() deck {
 	var deck deck
 	for _, suite := range suites {
-		for j := 1; j <= 12; j++{
+		for j := 1; j <= 12; j++ {
 			deck = append(deck, card{number: j, suite: suite})
 		}
 	}
@@ -39,7 +41,9 @@ func (d deck) deal(n int) (deck, deck) {
 
 func (d deck) save(name string) bool {
 	error := ioutil.WriteFile(name, []byte(d.String()), 0666)
-	if error == nil { return true }
+	if error == nil {
+		return true
+	}
 	return false
 }
 
@@ -57,7 +61,7 @@ func read(name string) deck {
 
 	var deck deck
 
-	for _, c := range deckStr{
+	for _, c := range deckStr {
 		deck = append(deck, toCard(c))
 	}
 	return deck
@@ -69,6 +73,8 @@ func toCard(s string) card {
 	return card{number, suite}
 }
 
+//to restrict possivle suite values I could create a func "toSuite" and check the input
+
 func (d deck) String() string {
 	var s []string
 	for _, c := range d {
@@ -79,4 +85,14 @@ func (d deck) String() string {
 
 func (c card) String() string {
 	return strconv.Itoa(c.number) + " of " + string(c.suite)
+}
+
+func (d deck) shuffle() {
+	//If we don't generate a seed it will always be the same
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := range d {
+		newPos := r.Intn(len(d))
+
+		d[newPos], d[i] = d[i], d[newPos]
+	}
 }
