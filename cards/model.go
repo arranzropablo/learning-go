@@ -9,7 +9,8 @@ var suites = [4]suite{"Spades", "Clubs", "Diamonds", "Hearts"}
 //We create a card type with a suite (which is a string) and a number (which is an int)
 type card struct {
 	number int
-	suite  suite
+	//if name and type are the same we can just write it once
+	suite
 }
 
 //Then we create the type deck which is a array of cards
