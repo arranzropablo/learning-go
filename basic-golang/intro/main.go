@@ -35,6 +35,9 @@ const (
 )
 
 func main() {
+	//You can defer a func, it means it will be executed when the surrounding func returns
+	defer fmt.Println("defeeeeeeeeeeeeer")
+
 	//fmt is the standard i/o system
 	//func can return more than one param, for example Println returns num of chars printed and error
 	fmt.Println(fmt.Println("Hello world"))
