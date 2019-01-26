@@ -44,3 +44,13 @@ func TestSaveAndRead(t *testing.T) {
 	}
 	os.Remove(FILE_NAME)
 }
+
+//Benchmark test (performance test), it executes a func (in this case newDeck) N times and prints how many times it's executed and
+//the mean of nanoseconds it took each time
+
+//go test -bench='.*'
+func BenchmarkNewDeck (b *testing.B){
+	for i := 0; i < b.N; i++ {
+		newDeck()
+	}
+}

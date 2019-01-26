@@ -26,7 +26,7 @@ func main() {
 	//}
 
 	//c is a channel for strings
-	c:= make(chan string)
+	c := make(chan string)
 
 	for _, link := range links {
 		//with go instruction, it executes a call in a different goroutine
@@ -46,7 +46,30 @@ func main() {
 
 	//this makes an infinite loop
 	//for {
-	//
+	//	if (){
+	//		//we also have break keyword to stop loops
+	//		break
+	//		//also continue keyword which will start next iteration of loop
+	//		continue
+	//	}
+	//}
+
+	//We can set a label for a piece of code
+	//OutterFor:
+	//for {
+	//	for{
+	//		if(){
+	//			continue OutterFor
+	//			goto OutterFor
+	//		}
+	//	}
+	//}
+
+	//We can make while loops like this
+	//i := 0
+	//for i < len(links) {
+	//	fmt.Println(<-c)
+	//	i++
 	//}
 
 	for item := range c {

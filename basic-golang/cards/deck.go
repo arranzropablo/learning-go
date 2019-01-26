@@ -85,6 +85,7 @@ func toCard(s string) card {
 //to restrict possivle suite values I could create a func "toSuite" and check the input
 //Or having the deck outside the package main and the properties not visible outside package deck and
 //in the func which set the suite, check whether it's valid
+//Then to import a package we just have to import it as a normal library
 
 func (d deck) String() string {
 	var s []string

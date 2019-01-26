@@ -27,4 +27,11 @@ func main() {
 	//fmt.Println("Saved file:")
 	//read("playerdeck.txt").print()
 
+
+	//We need pointers to read from console
+	var name string
+	fmt.Println("what's your name")
+	fmt.Scan(&name)
+	fmt.Printf("Hello %s \n", name)
+
 }

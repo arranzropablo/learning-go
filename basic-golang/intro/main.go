@@ -4,6 +4,34 @@ package main
 import (
 	//We cant declare variables or import packages which wont be used, because it wont compile
 	"fmt"
+
+	//We can import libraries from github with the route and with "go get <URL>"
+	//"github.com/GoesToEleven/GolangTraining/02_package/stringutil"
+)
+
+const EXAMPLE = "You can declare const and vars outside of functions, if they are not short variables"
+
+//We can give constants a number value with iota (starting in 0 and adding 1 each const), this is similar to enums
+const (
+	a = iota // 0
+	b        // 1
+	c        // 2
+)
+
+//With iota we can skip an iota
+const (
+	d = iota // 0
+	_        // 1
+	f        // 2
+)
+
+//<< and >> are binary shift
+const (
+	_  = iota             // 0
+	KB = 1 << (iota * 10) // 1 << (1 * 10)
+	MB = 1 << (iota * 10) // 1 << (2 * 10)
+	GB = 1 << (iota * 10) // 1 << (3 * 10)
+	TB = 1 << (iota * 10) // 1 << (4 * 10)
 )
 
 func main() {
@@ -13,6 +41,12 @@ func main() {
 
 	//Sprintf formats the given string and returns it or an error
 	fmt.Println(fmt.Sprintf("Hello world %d", 5))
+
+	//We can format text with multiple utilities, like converting a number to binary or hex
+	fmt.Printf("%d \t %b \t %x \t %#X \n", 42, 42, 42, 42)
+
+	//We can also convert a number to its UTF-8 equivalent
+	fmt.Printf("%q \n", 42)
 
 	//Types and vars
 
@@ -26,6 +60,8 @@ func main() {
 	)
 	var asd, dsa string = "this is", "possible too"
 
+	//var asd1, dsa2 = "this is", 2
+
 	//short variables are a short way to initialize variables
 	short := "short"
 	shortb := true
@@ -33,7 +69,16 @@ func main() {
 	//you can initialize many variables of dif types at once
 	boolvar, intvar, floatvar := true, 64, 64.2
 
-	fmt.Println(a, text, number, text2, asd, dsa, boolean, short, shortb, boolvar, intvar, floatvar)
+	//with single quotes it gets converted to unicode number
+	unicode := 'm'
+
+	backticks :=
+		`
+	with backticks
+	you dont need to escape endlines or tabs
+	or "quotes"`
+
+	fmt.Println(a, text, number, text2, asd, dsa, boolean, short, shortb, boolvar, intvar, floatvar, unicode, backticks)
 
 	const CONSTANT = "GOPHER"
 
@@ -64,5 +109,3 @@ func getAOfClubs() (string, string) {
 func deckSize() int64 {
 	return 52
 }
-
-const EXAMPLE = "You can declare const and vars outside of functions, if they are not short variables"
