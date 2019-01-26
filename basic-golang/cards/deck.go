@@ -21,7 +21,7 @@ func newDeck() deck {
 	return deck
 }
 
-//This function has deck as a receiver
+//This function has deck as a receiver (receivers can be nil, go understand them as another parameter)
 //This way any var of type deck in our application have access to func print
 //This method is "attached" to deck type
 //By convention names of receivers are just 1 or 2 letters
