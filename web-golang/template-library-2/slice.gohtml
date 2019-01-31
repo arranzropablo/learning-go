@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Peeps</title>
+</head>
+<body>
+<ul>
+    {{/*if we just want the elements*/}}
+    {{/*{{range .}}*/}}
+
+    {{range $i, $e := .}}
+    <li>{{$i}} -- {{$e}}</li>
+    {{end}}
+</ul>
+</body>
+</html>
