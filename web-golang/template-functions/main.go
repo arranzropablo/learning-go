@@ -2,9 +2,11 @@ package main
 
 import (
 	"log"
+	"math"
 	"os"
 	"strings"
 	"text/template"
+	"time"
 )
 
 var tpl *template.Template
@@ -13,6 +15,10 @@ var tpl *template.Template
 var fm = template.FuncMap{
 	"uc": strings.ToUpper,
 	"ft": firstThree,
+	"fdateMDY": monthDayYear,
+	"fdbl":  double,
+	"fsq":   square,
+	"fsqrt": sqRoot,
 }
 
 type sage struct {
@@ -73,6 +79,18 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	err = tpl.ExecuteTemplate(os.Stdout, "time.gohtml", time.Now())
+	if err != nil {
+		log.Fatalln(err)
+	}
+	err = tpl.ExecuteTemplate(os.Stdout, "pipeline.gohtml", 3)
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
+
+func monthDayYear(t time.Time) string {
+	return t.Format("01-02-2006")
 }
 
 func firstThree(s string) string {
@@ -81,4 +99,16 @@ func firstThree(s string) string {
 		s = s[:3]
 	}
 	return s
+}
+
+func double(x int) int {
+	return x + x
+}
+
+func square(x int) float64 {
+	return math.Pow(float64(x), 2)
+}
+
+func sqRoot(x float64) float64 {
+	return math.Sqrt(x)
 }
