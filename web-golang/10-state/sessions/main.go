@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	//can get all the dependencies with go get ./...
 	"github.com/satori/go.uuid"
 	"net/http"
 )
